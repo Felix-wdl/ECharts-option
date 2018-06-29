@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>折线（曲线）图</title>
+    <script src="../js/echarts.min.js"></script>
+    <style>
+        #curve {
+            margin: 60px auto;
+            width: 800px;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 图表生成的载体 -->
+    <div id="curve"></div>
+</body>
+<script>
+    var chart = echarts.init(document.getElementById("curve"));
+    var option = {
+        //提示框组件 详见：http://echarts.baidu.com/option.html#tooltip
+        tooltip: {
+            trigger: "axis",
+            //自定义提示内容
+            formatter: function (v) {
+                var str = "";
+                for (var i = 0; i < v.length; i++) {
+                    if (v[i].color == "#4ab3e8") {
+                        str +=
+                            "<div style='margin-right: 2px;display: inline-block;width:15px;height:10px;background:#4ab3e8;'></div>入款金额/元: " +
+                            v[i].data +
+                            "</br>";
+                    } else if (v[i].color == "#fb6637") {
+
+                        str +=
+                            "<div style='margin-right: 2px;display: inline-block;width:15px;height:10px;background:#fb6637;'></div>优惠金额/元: " +
+                            v[i].data +
+                            "</br>";
+                    } else {
+                        str +=
+                            "<div style='margin-right: 2px;display: inline-block;width:15px;height:10px;background:#2dc709;'></div>入款总金额/元: " +
+                            v[i].data +
+                            "</br>";
+                    }
+                }
+                var strEnd = v[0].name + "</br>" + str;
+                return strEnd;
+            }
+        },
+        //直角坐标系内网格绘制 详见：http://echarts.baidu.com/option.html#grid
+        grid: {
+            left: "5%",
+            top: "15%",
+            right: "5%",
+            containLabel: true,
+            borderColor: "#eaeaea"
+        },
+        //调色盘颜色列表 
+        //如果没有设置改项，将采用默认颜色表 详见：http://echarts.baidu.com/option.html#color
+        color: ["#4ab3e8", "#fb6637", "#2dc709"],
+        //图例组件 详见：http://echarts.baidu.com/option.html#legend
+        legend: {
+            //图例文字样式
+            textStyle: {
+                color: "#757575"
+            },
+            //数据数组 可通过改变 icon值来自定义图例项icon
+            data: [
+                { name: "入款金额/元", icon: "rect" },
+                { name: "优惠金/元", icon: "rect" },
+                { name: "入款总金额/元", icon: "rect" }
+            ]
+        },
+        //直角坐标系 grid 中的 x 轴 详见：http://echarts.baidu.com/option.html#xAxis.type
+        xAxis: {
+            type: "category",//类型，
+            boundaryGap: false,
+            data: ['2018-06-22', '2018-06-23', '2018-06-24', '2018-06-25', '2018-06-26', '2018-06-27'],
+            //坐标轴轴线相关设置。
+            axisLine: {
+                lineStyle: {
+                    color: "#eaeaea"
+                }
+            },
+            //坐标轴刻度标签的相关设置。
+            axisLabel: {
+                textStyle: {
+                    color: "#757575"
+                }
+            },
+            //坐标轴在 grid 区域中的分隔线设置
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    color: "#eaeaea"
+                }
+            }
+        },
+        //直角坐标系 grid 中的 y 轴 详见：http://echarts.baidu.com/option.html#yAxis
+        yAxis: {
+            name: "元",
+            type: "value", //坐标轴类型。
+            //坐标轴轴线相关设置。
+            axisLine: {
+                lineStyle: {
+                    color: "#eaeaea"
+                }
+            },
+            //坐标轴刻度标签的相关设置。
+            axisLabel: {
+                textStyle: {
+                    color: "#757575"
+                }
+            },
+            //坐标轴在 grid 区域中的分隔线设置
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    color: "#eaeaea"
+                }
+            }
+        },
+        //系列列表 -- 数据详情 http://echarts.baidu.com/option.html#series
+        //每条数据通过 type 决定自己的图表类型
+        series: [
+            {
+                name: "入款金额/元",
+                type: "line",
+                //区域填充样式
+                areaStyle: {
+                    normal: {
+                        color: "rgba(74,179,232,.1)"
+                    }
+                },
+                smooth: true, //是否平滑曲线显示。
+                //折线拐点标志的样式。
+                itemStyle: {},
+                //图形上的文本标签
+                label: {
+                    normal: {
+                        show: true,
+                        position: "top",
+                        color: "#4ab3e8"
+                    }
+                },
+                data: [312, 141, 552, 612, 251, 531]
+            },
+            {
+                name: "优惠金/元",
+                type: "line",
+                areaStyle: {
+                    normal: {
+                        type: "default",
+                        color: "rgba(251,102,55,.1)"
+                    }
+                },
+                smooth: false,
+                itemStyle: {
+                    normal: {
+                        areaStyle: {
+                            type: "default"
+                        }
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: "top",
+                        color: "#fb6637"
+                    }
+                },
+                data: [421, 241, 421, 331, 521, 312]
+            },
+            {
+                name: "入款总金额/元",
+                type: "line",
+                lineStyle: {
+                    type: "dashed"
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: "top",
+                        color: "#2dc709"
+                    }
+                },
+                smooth: true,
+                data: [531, 641, 451, 321, 451, 213]
+            }
+        ]
+    };
+    //模拟加载动画
+    chart.showLoading();
+    setTimeout(function () {
+        //加载动画隐藏并设置图表数据
+        chart.hideLoading();
+        chart.setOption(option);
+    }, 1200);
+    //图表大小随窗口改变而改变
+    window.onresize = function () {
+        chart.resize();
+    };
+</script>
+
+</html>
