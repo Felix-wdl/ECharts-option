@@ -10,7 +10,7 @@
     <style>
         #curve {
             margin: 60px auto;
-            width: 800px;
+            max-width: 800px;
             height: 400px;
         }
     </style>
@@ -203,6 +203,7 @@
     }, 1200);
     //图表大小随窗口改变而改变
     window.onresize = function () {
+        console.log(1);
         chart.resize();
     };
 </script>
