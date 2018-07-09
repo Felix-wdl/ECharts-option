@@ -5,6 +5,8 @@ ECharts 常用配置项及其简单注释
 #### 折线（曲线）图绘制及其参数注释
 
 [curve](./curve/index.html)
+#### 柱状图绘制及其参数注释
+[bar](./bar/index.html)
 
 #### 常用的方法
 
