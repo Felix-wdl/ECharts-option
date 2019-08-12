@@ -15,7 +15,7 @@ chart.init(); //实例化图表
 chart.setOption(); //设置图表数据
 chart.showLoading(); //数据加载动画
 chart.hideLoading(); //隐藏加载动画
-chart.resize(); // 改变图表大小
+chart.resize(); // 改变图表大小 
 chart.clear(); //清除当前图表上的数据 
 ```
 ### [预览](https://felix-wdl.github.io/ECharts-option/)
